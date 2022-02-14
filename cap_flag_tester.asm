@@ -85,18 +85,8 @@ question1_line1: db 'Is the sky blue?',0
 question2_line1: db '9+10=21?        ',0
 question3_line1: db 'Canadas national',0
 question3_line2: db 'sport is hockey?',0
-question4_line1: db 'Heat increases  ',0
-question4_line2: db 'heart rate?     ',0
-question5_line1: db 'Do neutrinos    ',0
-question5_line2: db 'have mass?      ',0
-question6_line1: db 'Does GABA       ',0
-question6_line2: db 'excite neurons? ',0
-question7_line1: db 'Can you overdose',0
-question7_line2: db 'on coffee?      ',0
-question8_line1: db 'Are male cows   ',0
-question8_line2: db 'called Bison?   ',0
-question9_line1: db '',0
-question9_line2: db '',0
+
+
 
 
 
@@ -280,177 +270,6 @@ avoid_p2_q3_win:
 ;keep looping awaiting answer
 ljmp question_3
 ret
-
-
-question_4:
-set_cursor(1,1) 
-Send_Constant_String(#question4_line1)
-set_cursor(2,1)
-send_constant_string(#question4_line2)
-ljmp measure_caps ;look for any button presses
-;check flags to determine right answer
-
-;player 1 gets a point if they say heat increases heart rate
-jb p1t,p1_q4_point
-sjmp avoid_p1_q4_point
-p1_q4_point:
-ljmp p1_right
-avoid_p1_q4_point:
-;player 2 gets a point if they say heat raises BPM
-jb p2t,p2_q4_point
-sjmp avoid_p2_q4_point
-p2_q4_point:
-ljmp p2_right
-avoid_p2_q4_point:
-
-
-
-;player 1 loses a point if they heat no raise BPM
-jb p1f,p1_q4_lose
-sjmp avoid_p1_q4_lose
-p1_q4_lose:
-ljmp p1_wrong
-avoid_p1_q4_lose:
-;player 2 lose a point if they say heat no raise BPM
-jb p2f,p2_q4_lose
-sjmp avoid_p2_q4_lose
-p2_q4_lose:
-ljmp p2_wrong
-avoid_p2_q4_lose:
-
-
-;keep looping awaiting answer
-ljmp question_4
-ret
-
-
-
-question_5:
-set_cursor(1,1) 
-Send_Constant_String(#question5_line1)
-set_cursor(2,1)
-send_constant_string(#question5_line2)
-ljmp measure_caps ;look for any button presses
-;check flags to determine right answer
-;player 1 gets a point if they say neutrino have mass
-jb p1t,p1_q5_point
-sjmp avoid_p1_q5_point
-p1_q5_point:
-ljmp p1_right
-avoid_p1_q5_point:
-;player 2 gets a point if they say neutrino have mass
-jb p2t,p2_q5_point
-sjmp avoid_p2_q5_point
-p2_q5_point:
-ljmp p2_right
-avoid_p2_q5_point:
-
-
-
-;player 1 loses a point if they say neutrino massless
-jb p1f,p1_q5_lose
-sjmp avoid_p1_q5_lose
-p1_q5_lose:
-ljmp p1_wrong
-avoid_p1_q5_lose:
-;player 2 lose a point if they say neutrino massless
-jb p2f,p2_q5_lose
-sjmp avoid_p2_q5_lose
-p2_q5_lose:
-ljmp p2_wrong
-avoid_p2_q5_lose:
-
-
-;keep looping awaiting answer
-ljmp question_5
-ret
-
-
-
-question_6: 
-set_cursor(1,1) 
-Send_Constant_String(#question6_line1)
-set_cursor(2,1)
-Send_constant_string(#question6_line2)
-ljmp measure_caps ;look for any button presses
-;check flags to determine right answer
-
-;GABA inhibits neurons so players lose points for answering true
-
-jb p1t,p1_q6_lose
-sjmp avoid_p1_q6_lose
-p1_q6_lose:
-ljmp p1_wrong
-avoid_p1_q6_lose:
-
-jb p2t,p2_q6_lose
-sjmp avoid_p2_q6_lose
-p2_q6_lose:
-ljmp p2_wrong
-avoid_p2_q6_lose:
-
-
-
-
-jb p1f,p1_q6_win
-sjmp avoid_p1_q6_win
-p1_q6_win:
-ljmp p1_right
-avoid_p1_q6_win:
-
-jb p2f,p2_q6_win
-sjmp avoid_p2_q6_win
-p2_q6_win:
-ljmp p2_right
-avoid_p2_q6_win:
-
-
-;keep looping awaiting answer
-ljmp question_6
-ret
-
-
-
-question_7:
-set_cursor(1,1) 
-Send_Constant_String(#question7_line1)
-set_cursor(2,1)
-send_constant_string(#question7_line2)
-ljmp measure_caps ;look for any button presses
-;check flags to determine right answer
-
-;player gets a point if they say you can OD on coffee
-jb p1t,p1_q7_point
-sjmp avoid_p1_q7_point
-p1_q7_point:
-ljmp p1_right
-avoid_p1_q7_point:
-
-jb p2t,p2_q7_point
-sjmp avoid_p2_q7_point
-p2_q7_point:
-ljmp p2_right
-avoid_p2_q7_point:
-
-
-
-jb p1f,p1_q7_lose
-sjmp avoid_p1_q7_lose
-p1_q7_lose:
-ljmp p1_wrong
-avoid_p1_q7_lose:
-
-jb p2f,p2_q7_lose
-sjmp avoid_p2_q7_lose
-p2_q7_lose:
-ljmp p2_wrong
-avoid_p2_q7_lose:
-
-
-;keep looping awaiting answer
-ljmp question_7
-ret
-
 
 
 ;---------------------------------;
@@ -649,7 +468,7 @@ MyProgram:
     MOV Qnum,#1 ;start with question number 1
     
     ;ljmp measure_caps
-    ljmp Qsel
+    ;ljmp Qsel
     
     
 measure_caps:
@@ -774,7 +593,7 @@ measure2:
 	
 	
 	clr mf ;button not pressed by default
-	Load_y(200) ;if C>50nf then the button was pressed
+	Load_y(9000) ;if C>50nf then the button was pressed
 	lcall x_gt_y
 	;mf=(C>50nf)
 	jb mf, player_1_true
@@ -903,7 +722,7 @@ measure22:
 	;Seeing if player 1 hit the false button
 	
 	clr mf ;button not pressed by default
-	Load_y(200) ;if C>50nf then the button was pressed
+	Load_y(10000) ;if C>50nf then the button was pressed
 	lcall x_gt_y
 	;mf=(C>50nf)
 	jb mf, player_1_false
@@ -1041,7 +860,7 @@ measure23:
 	;Seeing if player 2 hit the true button
 	
 	clr mf ;button not pressed by default
-	Load_y(200) ;if C>50nf then the button was pressed
+	Load_y(8000) ;if C>50nf then the button was pressed
 	lcall x_gt_y
 	;mf=(C>50nf)
 	jb mf, player_2_true
@@ -1173,7 +992,7 @@ measure24:
 	;Seeing if player 2 hit the false button
 	
 	clr mf ;button not pressed by default
-	Load_y(200) ;if C>50nf then the button was pressed
+	Load_y(9000) ;if C>50nf then the button was pressed
 	lcall x_gt_y
 	;mf=(C>50nf)
 	jb mf, player_2_false
@@ -1285,7 +1104,7 @@ measure24:
 	
 	
 
-	;ljmp measure_caps
-	ljmp Qsel
+	ljmp measure_caps
+	;ljmp Qsel
 
 end
