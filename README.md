@@ -2,7 +2,8 @@
 
 This project was a collaborative effort with two other UBC students
 
-A quiz game where questions are true/false or yes/no and two players compete, gaining a point for a correct answer and losing a point for a wrong answer
+A quiz game where questions are true/false or yes/no and two players compete, gaining a point for a correct answer and losing a point for a wrong answer. 
+Capacitive buttons were used for players to input true or false
 
 Info on uploads
 
@@ -11,6 +12,8 @@ QuizGame_withRNG.asm is the final version of the project with randomized questio
 QuizGame_template.asm is an older version of the project with a set order of questions
 
 cap_flag_tester.asm was used to test the ability for the project to register capacitive button presses and debug issues with noise in measurements 
+
+cap_measurment_picofarads.asm was used to measure the capacitance of the 4 sensors
 
 
 
