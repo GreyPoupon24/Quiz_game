@@ -1,5 +1,16 @@
 # Quiz_game
+
+This project was a collaberative effort with two other UBC students
+
 A quiz game where questions are true/false or yes/no and two players compete, gaining a point for a correct answer and losing a point for a wrong answer
+
+Info on uploads
+
+cap_flag_tester.asm was used to test the ability for the project to register button presses and debug issues with noise
+
+
+
+
 
 Design Details
 
