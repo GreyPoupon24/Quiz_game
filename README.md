@@ -2,6 +2,12 @@
 
 This project was a collaborative effort with two other UBC students
 
+-Peter van den Doel
+
+-Eric Lim
+
+ -Brandon Seo
+
 A quiz game where questions are true/false or yes/no and two players compete, gaining a point for a correct answer and losing a point for a wrong answer. 
 Capacitive buttons were used for players to input true or false
 
